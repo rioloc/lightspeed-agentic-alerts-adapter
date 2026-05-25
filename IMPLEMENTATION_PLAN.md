@@ -15,15 +15,15 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 | Phase | Go Package / Target | Files Modified / Created | Task Stacking / Parallelism | Status |
 |-------|--------------------|--------------------------|-----------------------------|--------|
-| Phase 1 | Project root | `go.mod`, `Makefile`, directory structure | Independent | Planned |
-| Phase 2 | `internal/alertmanager` | `types.go`, `types_test.go` | Independent (after Phase 1) | Planned |
-| Phase 3 | `internal/proposal` | `naming.go`, `naming_test.go` | Independent (parallel with Phase 2) | Planned |
-| Phase 4 | `internal/alertmanager` | `client.go`, `client_test.go` | Blocked by Phase 2 | Planned |
-| Phase 5 | `internal/proposal` | `builder.go`, `builder_test.go` | Blocked by Phase 2, 3 | Planned |
-| Phase 6 | `internal/poller` | `poller.go`, `poller_test.go` | Blocked by Phase 4, 5 | Planned |
-| Phase 7 | `cmd` | `main.go` | Blocked by Phase 6 | Planned |
-| Phase 8 | Project root | `Dockerfile`, `Makefile` (finalize) | Blocked by Phase 7 | Planned |
-| Phase 9 | `deploy/` | `serviceaccount.yaml`, `clusterrole.yaml`, `clusterrolebinding.yaml`, `deployment.yaml` | Independent | Planned |
+| Phase 1 | Project root | `go.mod`, `Makefile`, directory structure | Independent | Complete |
+| Phase 2 | `internal/alertmanager` | `types.go`, `types_test.go` | Independent (after Phase 1) | Complete |
+| Phase 3 | `internal/proposal` | `naming.go`, `naming_test.go` | Independent (parallel with Phase 2) | Complete |
+| Phase 4 | `internal/alertmanager` | `client.go`, `client_test.go` | Blocked by Phase 2 | Complete |
+| Phase 5 | `internal/proposal` | `builder.go`, `builder_test.go` | Blocked by Phase 2, 3 | Complete |
+| Phase 6 | `internal/poller` | `poller.go`, `poller_test.go` | Blocked by Phase 4, 5 | Complete |
+| Phase 7 | `cmd` | `main.go` | Blocked by Phase 6 | Complete |
+| Phase 8 | Project root | `Dockerfile`, `Makefile` (finalize) | Blocked by Phase 7 | Complete |
+| Phase 9 | `deploy/` | `serviceaccount.yaml`, `clusterrole.yaml`, `clusterrolebinding.yaml`, `deployment.yaml` | Independent | Complete |
 
 ---
 
@@ -78,7 +78,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 | Key | Value |
 |-----|-------|
 | **Source** | `.ai/spec/initial-design.md` (sections: Project Structure, Dependencies, Configuration) |
-| **Status** | `Active` |
+| **Status** | `Complete` |
 | **Goal** | Initialize the Go module, directory layout, and build tooling so subsequent phases can compile |
 | **Package** | Project root |
 | **Dependencies** | None |
@@ -90,7 +90,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 #### Tasks
 
-- [ ] **Task 1.1: Initialize Go module**
+- [x] **Task 1.1: Initialize Go module**
 
   **Target Location**: `go.mod`
 
@@ -112,7 +112,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 1.2: Create directory structure**
+- [x] **Task 1.2: Create directory structure**
 
   **Target Location**: `cmd/`, `internal/alertmanager/`, `internal/proposal/`, `internal/poller/`
 
@@ -134,7 +134,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 1.3: Makefile with build, test, and vet targets**
+- [x] **Task 1.3: Makefile with build, test, and vet targets**
 
   **Target Location**: `Makefile`
 
@@ -163,7 +163,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 | Key | Value |
 |-----|-------|
 | **Source** | `.ai/spec/initial-design.md` (sections: Alert-to-Proposal Cardinality, AlertManager Authentication, Poll Loop) |
-| **Status** | `Active` |
+| **Status** | `Complete` |
 | **Goal** | Define Go types that model the AlertManager v2 API alert response |
 | **Package** | `internal/alertmanager` |
 | **Dependencies** | Phase 1 |
@@ -175,7 +175,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 #### Tasks
 
-- [ ] **Task 2.1: Define Alert and AlertStatus types**
+- [x] **Task 2.1: Define Alert and AlertStatus types**
 
   **Target Location**: `internal/alertmanager/types.go`, `internal/alertmanager/types_test.go`
 
@@ -203,7 +203,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 2.2: Helper methods on Alert**
+- [x] **Task 2.2: Helper methods on Alert**
 
   **Target Location**: `internal/alertmanager/types.go`, `internal/alertmanager/types_test.go`
 
@@ -240,7 +240,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 | Key | Value |
 |-----|-------|
 | **Source** | `.ai/spec/initial-design.md` (section: Race Condition Prevention) |
-| **Status** | `Active` |
+| **Status** | `Complete` |
 | **Goal** | Implement deterministic Proposal name generation and DNS-safe sanitization |
 | **Package** | `internal/proposal` |
 | **Dependencies** | Phase 1 |
@@ -252,7 +252,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 #### Tasks
 
-- [ ] **Task 3.1: Deterministic ProposalName function**
+- [x] **Task 3.1: Deterministic ProposalName function**
 
   **Target Location**: `internal/proposal/naming.go`, `internal/proposal/naming_test.go`
 
@@ -283,7 +283,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 3.2: DNS subdomain sanitization**
+- [x] **Task 3.2: DNS subdomain sanitization**
 
   **Target Location**: `internal/proposal/naming.go`, `internal/proposal/naming_test.go`
 
@@ -321,7 +321,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 | Key | Value |
 |-----|-------|
 | **Source** | `.ai/spec/initial-design.md` (sections: AlertManager Authentication, Why Polling, Error Handling) |
-| **Status** | `Active` |
+| **Status** | `Complete` |
 | **Goal** | Implement an HTTP client that fetches firing alerts from the AlertManager v2 API with ServiceAccount auth and TLS |
 | **Package** | `internal/alertmanager` |
 | **Dependencies** | Phase 2 |
@@ -333,7 +333,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 #### Tasks
 
-- [ ] **Task 4.1: Define AlertFetcher interface and Client struct**
+- [x] **Task 4.1: Define AlertFetcher interface and Client struct**
 
   **Target Location**: `internal/alertmanager/client.go`, `internal/alertmanager/client_test.go`
 
@@ -361,7 +361,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 4.2: FetchFiringAlerts implementation**
+- [x] **Task 4.2: FetchFiringAlerts implementation**
 
   **Target Location**: `internal/alertmanager/client.go`, `internal/alertmanager/client_test.go`
 
@@ -401,7 +401,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 | Key | Value |
 |-----|-------|
 | **Source** | `.ai/spec/initial-design.md` (sections: Alert to Proposal Mapping, Labels and Annotations) |
-| **Status** | `Active` |
+| **Status** | `Complete` |
 | **Goal** | Implement the mapping from an AlertManager Alert to a Proposal CR, including template rendering, label/annotation construction, and namespace resolution |
 | **Package** | `internal/proposal` |
 | **Dependencies** | Phase 2, Phase 3 |
@@ -413,7 +413,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 #### Tasks
 
-- [ ] **Task 5.1: Request template rendering**
+- [x] **Task 5.1: Request template rendering**
 
   **Target Location**: `internal/proposal/builder.go`, `internal/proposal/builder_test.go`
 
@@ -445,7 +445,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 5.2: BuildProposal function**
+- [x] **Task 5.2: BuildProposal function**
 
   **Target Location**: `internal/proposal/builder.go`, `internal/proposal/builder_test.go`
 
@@ -482,7 +482,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 5.3: Labels and annotations construction**
+- [x] **Task 5.3: Labels and annotations construction**
 
   **Target Location**: `internal/proposal/builder.go`, `internal/proposal/builder_test.go`
 
@@ -521,7 +521,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 | Key | Value |
 |-----|-------|
 | **Source** | `.ai/spec/initial-design.md` (sections: Poll Loop, Deduplication, Race Condition Prevention, Error Handling, Alert Resolution Behavior) |
-| **Status** | `Active` |
+| **Status** | `Complete` |
 | **Goal** | Implement the core poll loop that fetches alerts, diffs against existing Proposals, and creates new Proposals subject to deduplication rules |
 | **Package** | `internal/poller` |
 | **Dependencies** | Phase 4, Phase 5 |
@@ -533,7 +533,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 #### Tasks
 
-- [ ] **Task 6.1: Define Poller struct and dependencies**
+- [x] **Task 6.1: Define Poller struct and dependencies**
 
   **Target Location**: `internal/poller/poller.go`, `internal/poller/poller_test.go`
 
@@ -560,7 +560,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 6.2: InitialDelay filtering**
+- [x] **Task 6.2: InitialDelay filtering**
 
   **Target Location**: `internal/poller/poller.go`, `internal/poller/poller_test.go`
 
@@ -591,7 +591,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 6.3: Active Proposal deduplication**
+- [x] **Task 6.3: Active Proposal deduplication**
 
   **Target Location**: `internal/poller/poller.go`, `internal/poller/poller_test.go`
 
@@ -623,7 +623,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 6.4: Cooldown window check**
+- [x] **Task 6.4: Cooldown window check**
 
   **Target Location**: `internal/poller/poller.go`, `internal/poller/poller_test.go`
 
@@ -654,7 +654,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 6.5: Proposal creation with 409 Conflict handling**
+- [x] **Task 6.5: Proposal creation with 409 Conflict handling**
 
   **Target Location**: `internal/poller/poller.go`, `internal/poller/poller_test.go`
 
@@ -686,7 +686,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 6.6: Full poll cycle integration**
+- [x] **Task 6.6: Full poll cycle integration**
 
   **Target Location**: `internal/poller/poller.go`, `internal/poller/poller_test.go`
 
@@ -723,7 +723,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 | Key | Value |
 |-----|-------|
 | **Source** | `.ai/spec/initial-design.md` (sections: Health Probes, Configuration, Deployment) |
-| **Status** | `Active` |
+| **Status** | `Complete` |
 | **Goal** | Wire up the main binary with signal handling, health/readiness probes, and the poll loop |
 | **Package** | `cmd` |
 | **Dependencies** | Phase 6 |
@@ -735,7 +735,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 #### Tasks
 
-- [ ] **Task 7.1: Health and readiness probe server**
+- [x] **Task 7.1: Health and readiness probe server**
 
   **Target Location**: `cmd/main.go`
 
@@ -760,7 +760,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 7.2: Signal handling and graceful shutdown**
+- [x] **Task 7.2: Signal handling and graceful shutdown**
 
   **Target Location**: `cmd/main.go`
 
@@ -785,7 +785,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 7.3: In-cluster client setup and main loop**
+- [x] **Task 7.3: In-cluster client setup and main loop**
 
   **Target Location**: `cmd/main.go`
 
@@ -818,7 +818,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 | Key | Value |
 |-----|-------|
 | **Source** | `.ai/spec/initial-design.md` (section: Deployment) |
-| **Status** | `Active` |
+| **Status** | `Complete` |
 | **Goal** | Create a multi-stage Dockerfile and finalize the Makefile with image build targets |
 | **Package** | Project root |
 | **Dependencies** | Phase 7 |
@@ -830,7 +830,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 #### Tasks
 
-- [ ] **Task 8.1: Multi-stage Dockerfile**
+- [x] **Task 8.1: Multi-stage Dockerfile**
 
   **Target Location**: `Dockerfile`
 
@@ -855,7 +855,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 8.2: Makefile finalization**
+- [x] **Task 8.2: Makefile finalization**
 
   **Target Location**: `Makefile`
 
@@ -885,7 +885,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 | Key | Value |
 |-----|-------|
 | **Source** | `.ai/spec/initial-design.md` (sections: Deployment, RBAC) |
-| **Status** | `Active` |
+| **Status** | `Complete` |
 | **Goal** | Create the Kubernetes resource manifests for deploying the adapter |
 | **Package** | `deploy/` |
 | **Dependencies** | None |
@@ -897,7 +897,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 #### Tasks
 
-- [ ] **Task 9.1: ServiceAccount**
+- [x] **Task 9.1: ServiceAccount**
 
   **Target Location**: `deploy/serviceaccount.yaml`
 
@@ -919,7 +919,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 9.2: ClusterRole and ClusterRoleBinding for AlertManager access**
+- [x] **Task 9.2: ClusterRole and ClusterRoleBinding for AlertManager access**
 
   **Target Location**: `deploy/clusterrole-alertmanager.yaml`, `deploy/clusterrolebinding-alertmanager.yaml`
 
@@ -941,7 +941,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 9.3: ClusterRole and ClusterRoleBinding for Proposal management**
+- [x] **Task 9.3: ClusterRole and ClusterRoleBinding for Proposal management**
 
   **Target Location**: `deploy/clusterrole-proposals.yaml`, `deploy/clusterrolebinding-proposals.yaml`
 
@@ -964,7 +964,7 @@ The lightspeed-agentic-alerts-adapter is a stateless, single-purpose Go binary t
 
 ---
 
-- [ ] **Task 9.4: Deployment manifest**
+- [x] **Task 9.4: Deployment manifest**
 
   **Target Location**: `deploy/deployment.yaml`
 
